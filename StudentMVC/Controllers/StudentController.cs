@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentMVC.Interface;
 using StudentMVC.Models;
+using StudentMVC.Models.ViewModels;
 using System.Threading.Tasks;
 
 namespace COREVide.Controllers
@@ -43,8 +44,8 @@ namespace COREVide.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            await _repo.DeleteStudentAsync(id);
-            return RedirectToAction("List");
+            if(await _repo.DeleteStudentAsync(id)) return RedirectToAction("List");
+            return NotFound();
         }
 
         [HttpGet]
@@ -54,9 +55,9 @@ namespace COREVide.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(string name, string lastname)
+        public async Task<IActionResult> Add(AddStudent student )
         {
-            await _repo.AddStudentAsync(name, lastname);
+            await _repo.AddStudentAsync(student);
             return RedirectToAction("List");
         }
     }

@@ -1,12 +1,10 @@
-﻿namespace StudentMVC.Models
+﻿namespace StudentMVC.Models.ViewModels
 {
-    public class Student
+    public class AddStudent
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public DateTime Birthdate { get; set; }
         public string Email { get; set; } = string.Empty;
-       
     }
 }

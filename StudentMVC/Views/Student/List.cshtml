@@ -9,10 +9,16 @@
         {
             <div class="gap-10 flex flex-row">
                 <h3> id: @student.Id - Nom : @student.LastName - Prénom : @student.Name</h3>
-                <a href="@Url.ActionLink("Edit", "Student", new { id = student.Id })" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">
+                <a class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700"
+                   asp-controller="Student"
+                   asp-action="Edit"
+                   asp-route-id="@student.Id">
                     Edit
                 </a>
-                <a href="@Url.ActionLink("Delete", "Student", new { id = student.Id })" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">
+                <a class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700"
+                   asp-controller="Student"
+                   asp-action="Delete"
+                   asp-route-id="@student.Id">
                     Delete
                 </a>
             </div>

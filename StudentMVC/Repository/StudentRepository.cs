@@ -2,6 +2,7 @@
 using StudentMVC.Data;
 using StudentMVC.Interface;
 using StudentMVC.Models;
+using StudentMVC.Models.ViewModels;
 using System.Reflection.Metadata.Ecma335;
 
 namespace StudentMVC.Repository
@@ -15,21 +16,23 @@ namespace StudentMVC.Repository
             _context = context;
         }
 
-        public async Task AddStudentAsync(string name, string lastname)
+        public async Task AddStudentAsync(AddStudent student)
         {
-            Student newStudent = new Student { Name = name, LastName = lastname };
+            Student newStudent = new Student { Name = student.Name, LastName = student.LastName, Birthdate = student.Birthdate, Email = student.Email };
             await _context.Students.AddAsync(newStudent);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteStudentAsync(int idStudent)
+        public async Task<bool> DeleteStudentAsync(int idStudent)
         {
             var removedStudent = await _context.Students.FirstOrDefaultAsync(s => s.Id == idStudent);
-            if (removedStudent != null)
+            if (removedStudent == null)
             {
-                _context.Students.Remove(removedStudent);
+                return false;
             }
+            _context.Students.Remove(removedStudent);
             await _context.SaveChangesAsync();
+            return true;
 
         }
 
@@ -40,6 +43,8 @@ namespace StudentMVC.Repository
             {
                 existingStudent.Name = student.Name;
                 existingStudent.LastName = student.LastName;
+                existingStudent.Birthdate = student.Birthdate;
+                existingStudent.Email = student.Email;
             }
             await _context.SaveChangesAsync();
 

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using StudentMVC.Models.ViewModels;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace StudentMVC.Repository
 {
@@ -16,30 +18,40 @@ namespace StudentMVC.Repository
                 Id = 1,
                 Name = "test",
                 LastName = "test",
+                Birthdate = new DateTime(2022,10,10),
+                Email = "test@gmail.com"
             },
             new Student()
             {
                 Id = 2,
                 Name = "test2",
                 LastName = "test2",
+                Birthdate = new DateTime(2022,04,12),
+                Email = "test2@gmail.com"
             },
             new Student()
             {
                 Id = 3,
                 Name = "test3",
                 LastName = "test3",
+                Birthdate = new DateTime(2012,01,10),
+                Email = "test3@gmail.com"
             },
             new Student()
             {
                 Id = 4,
                 Name = "test4",
                 LastName = "test4",
+                Birthdate = new DateTime(1999,06,22),
+                Email = "test4@gmail.com"
             },
             new Student()
             {
                 Id = 5,
                 Name = "test5",
                 LastName = "test5",
+                Birthdate = new DateTime(1982,02,12),
+                Email = "test@gmail.com"
             }
         };
 
@@ -48,14 +60,16 @@ namespace StudentMVC.Repository
             return Task.FromResult(_students);
         }
 
-        public Task AddStudentAsync(string name, string lastname)
+        public Task AddStudentAsync(AddStudent student)
         {
             var idNewStudent = _students.Max(x => x.Id) + 1;
             var newStudent = new Student()
             {
                 Id = idNewStudent,
-                Name = name,
-                LastName = lastname,
+                Name = student.Name,
+                LastName = student.LastName,
+                Birthdate = student.Birthdate,
+                Email = student.Email
             };
             _students.Add(newStudent);
             return Task.CompletedTask;
@@ -74,14 +88,18 @@ namespace StudentMVC.Repository
             {
                 existingStudent.Name = student.Name;
                 existingStudent.LastName = student.LastName;
+                existingStudent.Birthdate = student.Birthdate;
+                existingStudent.Email = student.Email;
             }
             return Task.CompletedTask;
         }
 
-        public Task DeleteStudentAsync(int idStudent)
+        public Task<bool> DeleteStudentAsync(int idStudent)
         {
-            var removed = _students.RemoveAll(s => s.Id == idStudent);
-            return Task.CompletedTask;
+            var removedStudent = _students.Find(s => s.Id == idStudent);
+            if (removedStudent is null) return Task.FromResult(false);
+            _students.Remove(removedStudent);
+            return Task.FromResult(true);
         }
     }
 }

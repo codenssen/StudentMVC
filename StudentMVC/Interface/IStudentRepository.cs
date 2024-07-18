@@ -1,4 +1,5 @@
 ﻿using StudentMVC.Models;
+using StudentMVC.Models.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,9 +8,9 @@ namespace StudentMVC.Interface
     public interface IStudentRepository
     {
         Task<List<Student>> GetStudentsAsync();
-        Task AddStudentAsync(string name, string lastname);
+        Task AddStudentAsync(AddStudent student);
         Task<Student?> GetStudentByIdAsync(int idStudent);
         Task EditStudentAsync(Student student);
-        Task DeleteStudentAsync(int idStudent);
+        Task<bool> DeleteStudentAsync(int idStudent);
     }
 }
