@@ -18,8 +18,8 @@ namespace StudentMVC
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            //builder.Services.AddScoped<IStudentRepository,StudentLocalRepository>();
-            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+            builder.Services.AddScoped<IStudentRepository,StudentLocalRepository>();
+            //builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
             var app = builder.Build();
 

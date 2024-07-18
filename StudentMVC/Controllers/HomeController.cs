@@ -6,9 +6,7 @@ namespace StudentMVC.Controllers
     {
         public IActionResult Index()
         {
-            IEnumerable<Int32> ids = new List<Int32>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
-            return View(ids);
+            return View();
         }
     }
 }
