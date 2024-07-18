@@ -1,0 +1,30 @@
+﻿@model IEnumerable<int>
+
+@{
+    int total = 0;
+}
+
+<h1>Homeindex</h1>
+<br />
+<br>
+<div class="w-44 relative overflow-x-auto">
+    <table class="text-gray-500 w-full text-left text-sm rtl:text-right">
+        <thead class="text-gray-700 bg-gray-50 text-xs uppercase">
+            <tr >
+                <th scope="col" class="px-6 py-3">Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (int nb in Model)
+            {
+                total += nb;
+                <tr class="bg-white border-b">
+                    <td class="px-2 py-2">@nb</td>
+                </tr>
+            }
+            <tr class="text-gray-700 bg-gray-50 text-xs font-bold uppercase">
+                <td class="px-6 py-4">Total: @total</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
