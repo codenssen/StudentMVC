@@ -1,7 +1,5 @@
 ﻿using StudentMVC.Models;
 using StudentMVC.Models.ViewModels;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace StudentMVC.Interface
 {

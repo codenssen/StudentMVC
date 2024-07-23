@@ -1,11 +1,7 @@
 ﻿using StudentMVC.Interface;
 using StudentMVC.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using StudentMVC.Models.ViewModels;
-using Microsoft.AspNetCore.Http.HttpResults;
+
 
 namespace StudentMVC.Repository
 {

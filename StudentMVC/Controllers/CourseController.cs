@@ -3,22 +3,21 @@ using StudentMVC.Interface;
 using StudentMVC.Models;
 using StudentMVC.Models.ViewModels;
 
-
-namespace COREVide.Controllers
+namespace StudentMVC.Controllers
 {
-    public class StudentController : Controller
+    public class CourseController : Controller
     {
-        private readonly IStudentRepository _repo;
 
-        public StudentController(IStudentRepository repo)
+        private readonly ICourseRepository _repo;
+
+        public CourseController(ICourseRepository repo)
         {
             _repo = repo;
         }
-
         public async Task<IActionResult> List()
         {
-            var students = await _repo.GetStudentsAsync();
-            return View(students);
+            var courses = await _repo.GetCoursesAsync();
+            return View(courses);
         }
 
         [HttpGet]
@@ -28,41 +27,36 @@ namespace COREVide.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddStudent student)
+        public async Task<IActionResult> Add(AddCourse course)
         {
-            await _repo.AddStudentAsync(student);
+            await _repo.AddCourseAsync(course);
             return RedirectToAction("List");
         }
-
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var student = await _repo.GetStudentByIdAsync(id);
+            var course = await _repo.GetCourseByIdAsync(id);
 
-            if (student == null)
+            if (course == null)
             {
                 return View("List");
             }
 
-            return View(student);
+            return View(course);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Student student)
+        public async Task<IActionResult> Edit(Course course)
         {
-            await _repo.EditStudentAsync(student);
+            await _repo.EditCourseAsync(course);
             return RedirectToAction("List");
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            if (await _repo.DeleteStudentAsync(id)) return RedirectToAction("List");
+            if (await _repo.DeleteCourseAsync(id)) return RedirectToAction("List");
             return NotFound();
         }
-
-     
-
-
     }
 }

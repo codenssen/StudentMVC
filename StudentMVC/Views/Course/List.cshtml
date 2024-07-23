@@ -1,0 +1,37 @@
+﻿@model List<StudentMVC.Models.Course>
+
+<h3 class="text-xl">Liste des cours :</h3>
+<div class="gap-4 flex flex-col">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var course in Model)
+        {
+            <div class="gap-10 flex flex-row">
+                <h3> id: @course.Id - Nom : @course.Name</h3>
+                <a class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700"
+                   asp-controller="Course"
+                   asp-action="Edit"
+                   asp-route-id="@course.Id">
+                    Edit
+                </a>
+                <a class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700"
+                   asp-controller="Course"
+                   asp-action="Delete"
+                   asp-route-id="@course.Id">
+                    Delete
+                </a>
+            </div>
+        }
+
+    }
+    else
+    {
+        <h3>Liste vide</h3>
+
+    }
+    <a class="bg-green-500 text-white py-1 px-2 w-36 rounded text-center hover:bg-green-700"
+       asp-controller="Course"
+       asp-action="Add">
+        Add Course
+    </a>
+</div>

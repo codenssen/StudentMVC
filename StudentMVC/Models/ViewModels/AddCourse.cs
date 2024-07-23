@@ -1,0 +1,7 @@
+﻿namespace StudentMVC.Models.ViewModels
+{
+    public class AddCourse
+    {
+        public string Name { get; set; } = string.Empty;
+    }
+}

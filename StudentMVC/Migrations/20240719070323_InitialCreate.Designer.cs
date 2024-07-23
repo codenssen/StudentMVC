@@ -12,7 +12,7 @@ using StudentMVC.Data;
 namespace StudentMVC.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240718122932_InitialCreate")]
+    [Migration("20240719070323_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,23 @@ namespace StudentMVC.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("StudentMVC.Models.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
+                });
 
             modelBuilder.Entity("StudentMVC.Models.Student", b =>
                 {
